@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button'
 import './App.css';
 import NintendoSwitch from '../devices/NintendoSwitch';
 import Payload from '../payloads/Payload';
@@ -16,7 +17,7 @@ function App() {
         <p>
           Press the button below to launch Hekate.
         </p>
-        <button onClick={launchPayload}>Launch Payload</button>
+        <Button onClick={launchPayload} variant="outline-primary">Launch Payload</Button>
       </header>
     </div>
   );
