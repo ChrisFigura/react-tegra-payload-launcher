@@ -8,3 +8,10 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.PayloadOptions {
+  display: inline-block;
+  margin: 1vh;
+  width: fit-content;
+  height: fit-content;
+}

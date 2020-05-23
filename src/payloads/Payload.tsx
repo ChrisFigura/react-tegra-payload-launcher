@@ -49,10 +49,6 @@ class Payload {
     return this.payload;
   }
 
-  // public static preparePayload(payload: FileReader): Payload {
-  //   return new Payload(new Uint8Array());
-  // }
-
   /**
    * Reads a payload file into a Uint8Array.
    * 

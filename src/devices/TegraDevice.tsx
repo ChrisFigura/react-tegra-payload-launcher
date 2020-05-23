@@ -45,14 +45,14 @@ class TegraDevice {
    * @return The number of packets that were written.
    */
   private async write(data: Uint8Array): Promise<number> {
+    // The number of bytes stored in each packet.
+    const PACKET_SIZE = 0x1000;
+    
     // Number for storing the number of packets that were written.
     let writeCount = 0;
 
     // Number for storing the number of bytes remaining in the payload.
     let length = data.length;
-
-    // The number of bytes stored in each packet.
-    const PACKET_SIZE = 0x1000;
 
     // Send all of the data in the payload to the device.
     while (length) {
@@ -86,7 +86,7 @@ class TegraDevice {
     const vulnLength = 0x7000;
 
     // Send a GET_STATUS request to the device with the specified
-    // vulnerability length, and ignore the warning since this is never used.
+    // vulnerability length.
     // eslint-disable-next-line
     const smash = await this.device.controlTransferIn({
       requestType: 'standard',
@@ -122,7 +122,7 @@ class TegraDevice {
 
     await device.claimInterface(0);
 
-    // Get the device ID, and ignore the warning since this is never used.
+    // Get the device ID.
     // eslint-disable-next-line
     const deviceID = await device.transferIn(1, 16);
 
