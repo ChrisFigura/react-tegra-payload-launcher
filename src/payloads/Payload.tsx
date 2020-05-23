@@ -49,13 +49,39 @@ class Payload {
     return this.payload;
   }
 
+  // public static preparePayload(payload: FileReader): Payload {
+  //   return new Payload(new Uint8Array());
+  // }
+
+  /**
+   * Reads a payload file into a Uint8Array.
+   * 
+   * @param file The payload file
+   */
+  private static readFile(file: Blob): Promise<ArrayBuffer> {
+    // Return a promise, so we can block until the file is loaded.
+    return new Promise((res, rej) => {
+      const reader = new FileReader();
+      reader.addEventListener('load', e => res(e.target!.result as ArrayBuffer));
+      reader.readAsArrayBuffer(file);
+    })
+  }
+
   /**
    * Prepare a payload to be sent to a Tegra X1 device.
    * 
    * @param payload The payload to be prepared.
    * @return The prepared Payload.
    */
-  public static preparePayload(payload: Uint8Array): Payload {
+  public static async preparePayload(payload: Uint8Array | Blob): Promise<Payload> {
+    if (payload instanceof Blob) {
+      // If we're passed a file, convert it into a Uint8Array.
+      payload = new Uint8Array(await this.readFile(payload));
+    } else {
+      // Otherwise, cast it to only be a Uint8Array.
+      payload = payload as Uint8Array;
+    }
+
     // TODO: Document
     const rcmLength = 0x30298;
 

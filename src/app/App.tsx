@@ -4,9 +4,6 @@ import './App.css';
 import NintendoSwitch from '../devices/NintendoSwitch';
 import Payload from '../payloads/Payload';
 
-// A custom bootloader for the Nintendo Switch.
-declare const CTCaer_Hekate: Uint8Array;
-
 /**
  * TODO: Document
  */
@@ -29,9 +26,12 @@ function App() {
 async function launchPayload() {
   // Request the device from the user.
   let device = await NintendoSwitch.requestDevice();
+
+  // Fetch the Hekate binary.
+  const hekate = await fetch("/static/payloads/hekate_ctcaer_5.2.1.bin");
   
   // Prepare the payload.
-  let payload = Payload.preparePayload(CTCaer_Hekate);
+  const payload = await Payload.preparePayload(await hekate.blob());
 
   // Send the payload to the device.
   device.launch(payload);
