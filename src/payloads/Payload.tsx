@@ -58,7 +58,8 @@ export default class Payload {
     // Return a promise, so we can block until the file is loaded.
     return new Promise((res, rej) => {
       const reader = new FileReader();
-      reader.addEventListener('load', e => res(e.target!.result as ArrayBuffer));
+      reader.addEventListener('load', 
+          e => res(e.target!.result as ArrayBuffer));
       reader.readAsArrayBuffer(file);
     })
   }
@@ -69,7 +70,8 @@ export default class Payload {
    * @param payload The payload to be prepared.
    * @return The prepared Payload.
    */
-  public static async preparePayload(payload: Uint8Array | Blob): Promise<Payload> {
+  public static async preparePayload(payload: Uint8Array | Blob):
+      Promise<Payload> {
     if (payload instanceof Blob) {
       // If we're passed a file, convert it into a Uint8Array.
       payload = new Uint8Array(await this.readFile(payload));
@@ -105,7 +107,8 @@ export default class Payload {
 
     // Put the intermezzo and the payload into the finalized payload.
     finalPayload.set(intermezzo, 0x2A8 + (0x4 * intermezzoAddressRepeatCount));
-    finalPayload.set(payload, 0x2A8 + (0x4 * intermezzoAddressRepeatCount) + 0x1000);
+    finalPayload.set(payload, 0x2A8 + (0x4 * intermezzoAddressRepeatCount)
+        + 0x1000);
 
     // Return the finalized payload.
     return new Payload(finalPayload);

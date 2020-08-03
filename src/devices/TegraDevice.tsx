@@ -108,7 +108,8 @@ export default class TegraDevice {
 
     // Try to request the device from the user.
     try {
-      device = await navigator.usb.requestDevice({ filters: [{ vendorId: vendorId }] });
+      device = await navigator.usb.requestDevice({
+          filters: [{ vendorId: vendorId }]});
     } catch (error) {
       throw new Error("Error selecting USB device: " + error);
     }
