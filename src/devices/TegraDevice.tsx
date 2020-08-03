@@ -3,7 +3,7 @@ import Payload from '../payloads/Payload';
 /**
  * Represents a Nvidia Tegra X1 based device vulnerable to CVE-2018-6242.
  */
-class TegraDevice {
+export default class TegraDevice {
   /**
    * The USBDevice object used to talk to the Tegra.
    */
@@ -130,5 +130,3 @@ class TegraDevice {
     return new TegraDevice(device);
   }
 }
-
-export default TegraDevice;

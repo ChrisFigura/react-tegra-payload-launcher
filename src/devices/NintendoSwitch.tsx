@@ -8,7 +8,7 @@ const VENDOR_ID = 0x0955;
 /**
  * Represents a Nintendo Switch vulnerable to CVE-2018-6242.
  */
-class NintendoSwitch extends TegraDevice {
+export default class NintendoSwitch extends TegraDevice {
   /**
    * Factory method for creating a new NintendoSwitch.
    */
@@ -16,5 +16,3 @@ class NintendoSwitch extends TegraDevice {
     return super.requestDevice(VENDOR_ID);
   }
 }
-
-export default NintendoSwitch;

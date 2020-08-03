@@ -25,7 +25,7 @@ const intermezzo = new Uint8Array([
 /**
  * Represents a payload for a Tegra based device.
  */
-class Payload {
+export default class Payload {
   /**
    * The raw data for the payload.
    */
@@ -111,5 +111,3 @@ class Payload {
     return new Payload(finalPayload);
   }
 }
-
-export default Payload;
